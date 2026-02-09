@@ -1,34 +1,48 @@
 import streamlit as st
 import time
 from agents import pro_agent, con_agent, judge_agent, reflection_agent
-
+import os
 # Page config
 st.set_page_config(
     page_title="Devil's Advocate AI",
     page_icon="⚖️",
-    layout="wide"
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
 
 # Custom CSS
 st.markdown("""
 <style>
     .main-header {
-        font-size: 2.5rem;
-        color: #1E3A8A;
+        font-size: 2.8rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
         text-align: center;
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
     }
-    .agent-card {
+    .metric-card {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
         padding: 20px;
         border-radius: 10px;
         margin: 10px 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
-    .verdict-card {
+    .agent-box {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 10px 0;
+        border-left: 5px solid #4CAF50;
+    }
+    .con-agent-box {
+        border-left: 5px solid #F44336;
+    }
+    .verdict-box {
         background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
         color: white;
-        padding: 20px;
+        padding: 25px;
         border-radius: 10px;
         margin: 10px 0;
     }
@@ -37,7 +51,7 @@ st.markdown("""
 
 # Header
 st.markdown('<h1 class="main-header">⚖️ Devil\'s Advocate AI</h1>', unsafe_allow_html=True)
-st.markdown("### Multi-Agent Decision System • Powered by Groq")
+st.markdown("### Multi-Agent Decision System • Powered by **Google Gemini**")
 st.caption("Get balanced perspectives before making important decisions")
 
 # Sidebar
@@ -47,7 +61,7 @@ with st.sidebar:
     st.markdown("""
     **How It Works:**
     1. 🤝 **Pro Agent** argues FOR
-    2. 🚫 **Con Agent** argues AGAINST
+    2. 🚫 **Con Agent** argues AGAINST  
     3. ⚖️ **Judge Agent** evaluates
     4. 🎯 **Final Verdict** delivered
     """)
@@ -73,8 +87,9 @@ with st.sidebar:
     
     # API status
     st.markdown("### 🔧 System Status")
-    st.success("✅ Groq API: Ready")
-    st.caption("Powered by Llama 3.3 70B")
+    st.success("✅ Gemini API: Ready")
+    model_name = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
+    st.caption(f"Powered by {model_name}")
 
 # Main input
 st.markdown("## 📝 Enter Your Decision Question")
@@ -229,4 +244,4 @@ elif debate_btn:
 
 # Footer
 st.divider()
-st.caption("Built with ❤️ for the Gemini 3 Hackathon | Powered by Groq Llama 3.3 70B")
+st.caption("Built with ❤️ for the Gemini 3 Hackathon | Powered by Google Gemini")
