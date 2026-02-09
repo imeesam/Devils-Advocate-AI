@@ -8,6 +8,7 @@ Instead of producing a single answer, the system:
 2. Generates a CON argument
 3. Uses a JUDGE agent to weigh both
 4. Produces a verdict with confidence and risks
+   -  *The confidence score reflects the Judge agent’s relative certainty based on argument strength, not a statistical probability.*
 
 ## Why it’s agentic
 - Multiple specialized agents
