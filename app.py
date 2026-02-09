@@ -2,6 +2,34 @@ import streamlit as st
 import time
 from agents import pro_agent, con_agent, judge_agent, reflection_agent
 import os
+import re
+
+def is_valid_question(text: str) -> bool:
+    text = text.strip().lower()
+
+    # Too short
+    if len(text) < 10:
+        return False
+
+    # Must contain at least one space (not a single word)
+    if " " not in text:
+        return False
+
+    # Must contain a question mark OR decision keyword
+    decision_keywords = [
+        "should", "is it", "is this", "do we", "can we",
+        "worth", "better", "viable", "good idea", "risk"
+    ]
+
+    if "?" not in text and not any(k in text for k in decision_keywords):
+        return False
+
+    # Reject obvious junk
+    if re.fullmatch(r"[a-zA-Z]+", text) and len(text) < 15:
+        return False
+
+    return True
+
 # Page config
 st.set_page_config(
     page_title="Devil's Advocate AI",
@@ -115,7 +143,8 @@ if clear_btn:
     st.session_state.pop("history", None)
     st.rerun()
 
-if debate_btn and question.strip():
+if debate_btn and is_valid_question(question):
+
     # Progress tracking
     progress_bar = st.progress(0)
     status_container = st.empty()
@@ -219,7 +248,6 @@ if debate_btn and question.strip():
     status_container.empty()
     
     # Success celebration
-    st.balloons()
     st.success("✅ Debate completed successfully!")
     
     # Add to history
@@ -240,7 +268,14 @@ if debate_btn and question.strip():
             st.write("No debates yet.")
 
 elif debate_btn:
-    st.error("❌ Please enter a question first!")
+    st.error(
+        "❌ Please enter a **clear decision-style question**.\n\n"
+        "Examples:\n"
+        "- Should we adopt microservices?\n"
+        "- Is this startup idea viable?\n"
+        "- Should hospitals use AI for triage?"
+    )
+
 
 # Footer
 st.divider()
