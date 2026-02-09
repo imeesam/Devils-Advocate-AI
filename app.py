@@ -108,7 +108,7 @@ with st.sidebar:
     
     for ex in examples:
         if st.button(f"• {ex}", use_container_width=True):
-            st.session_state.question = ex
+            st.session_state.question_input = ex
             st.rerun()
     
     st.divider()
