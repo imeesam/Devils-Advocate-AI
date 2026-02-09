@@ -77,8 +77,8 @@ st.markdown("""
     .verdict-box {
         background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
         color: white;
-        padding: 25px;
-        border-radius: 10px;
+        padding: 7px;
+        border-radius: 6px;
         margin: 10px 0;
     }
 </style>
