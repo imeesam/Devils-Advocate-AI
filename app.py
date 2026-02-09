@@ -111,8 +111,8 @@ with col3:
     advanced = st.toggle("🔍 Advanced", help="Adds reflection agent")
 
 if clear_btn:
-    for key in list(st.session_state.keys()):
-        del st.session_state[key]
+    st.session_state.question_input = ""
+    st.session_state.pop("history", None)
     st.rerun()
 
 if debate_btn and question.strip():
@@ -165,7 +165,7 @@ if debate_btn and question.strip():
         time.sleep(0.5)
         
         with verdict_placeholder.container():
-            st.markdown('<div class="verdict-card">', unsafe_allow_html=True)
+            st.markdown('<div class="verdict-box">', unsafe_allow_html=True)
             st.markdown("### ⚖️ FINAL VERDICT")
             
             # Parse and display verdict

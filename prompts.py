@@ -40,7 +40,7 @@ EVALUATION CRITERIA:
 4. Ethical considerations
 5. Long-term sustainability
 
-OUTPUT FORMAT (STRICTLY FOLLOW):
+OUTPUT FORMAT (FOLLOW STRUCTURE, WORDING MAY VARY):
 
 VERDICT: [Approved/Rejected/Conditional/Needs More Info]
 CONFIDENCE: [0.00-1.00]
@@ -56,4 +56,6 @@ RULES:
 - Be decisive but nuanced
 - Acknowledge valid points from both sides
 - Consider stakeholder impact
-- Prioritize practical outcomes"""
+- Prioritize practical outcomes
+- Avoid reusing phrasing, examples, or numeric estimates from prior responses.
+"""
