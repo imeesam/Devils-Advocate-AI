@@ -4,6 +4,13 @@ from agents import pro_agent, con_agent, judge_agent, reflection_agent
 import os
 import re
 
+def clear_question():
+    st.session_state["question_input"] = ""
+    st.session_state.pop("history", None)
+
+def fill_example(ex):
+    st.session_state["question_input"] = ex
+
 def is_valid_question(text: str) -> bool:
     text = text.strip().lower()
 
@@ -107,9 +114,12 @@ with st.sidebar:
     ]
     
     for ex in examples:
-        if st.button(f"• {ex}", use_container_width=True):
-            st.session_state.question_input = ex
-            st.rerun()
+        st.button(
+            f"• {ex}",
+            use_container_width=True,
+            on_click=fill_example,
+            args=(ex,)
+        )
     
     st.divider()
     
@@ -134,14 +144,13 @@ col1, col2, col3 = st.columns([2, 1, 1])
 with col1:
     debate_btn = st.button("🚀 Start AI Debate", type="primary", use_container_width=True)
 with col2:
-    clear_btn = st.button("🗑️ Clear", use_container_width=True)
+    st.button(
+        "🗑️ Clear",
+        use_container_width=True,
+        on_click=clear_question
+    )
 with col3:
     advanced = st.toggle("🔍 Advanced", help="Adds reflection agent")
-
-if clear_btn:
-    st.session_state.question_input = ""
-    st.session_state.pop("history", None)
-    st.rerun()
 
 if debate_btn and is_valid_question(question):
 
@@ -165,7 +174,7 @@ if debate_btn and is_valid_question(question):
         
         with pro_placeholder.container():
             st.markdown('<div class="agent-card">', unsafe_allow_html=True)
-            st.markdown("### 🤝 PRO AGENT (Arguments FOR)")
+            st.markdown("### 🤝 PRO AGENT")
             st.markdown(pro_result)
             st.markdown('</div>', unsafe_allow_html=True)
     
@@ -180,7 +189,7 @@ if debate_btn and is_valid_question(question):
         
         with con_placeholder.container():
             st.markdown('<div class="agent-card">', unsafe_allow_html=True)
-            st.markdown("### 🚫 CON AGENT (Arguments AGAINST)")
+            st.markdown("### 🚫 CON AGENT")
             st.markdown(con_result)
             st.markdown('</div>', unsafe_allow_html=True)
     
