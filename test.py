@@ -1,22 +1,31 @@
-import google.generativeai as genai
+from google import genai
 import os
 from dotenv import load_dotenv
 
 load_dotenv()
 
-# Configure
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+# Initialize client
+api_key = os.getenv("GEMINI_API_KEY")
+if not api_key:
+	print("⚠️ GEMINI_API_KEY not set in environment; aborting test")
+	raise SystemExit(1)
 
-# Test Gemini 3 Flash
-print("Testing Gemini 3 Flash Preview...")
-model_flash = genai.GenerativeModel('gemini-3-flash-preview')
-response = model_flash.generate_content("What is 2+2? Explain simply.")
-print(f"Gemini 3 Flash: {response.text[:100]}...")
+client = genai.Client(api_key=api_key)
 
-# Test Gemini 3 Pro
-print("\nTesting Gemini 3 Pro Preview...")
-model_pro = genai.GenerativeModel('gemini-3-pro-preview')
-response = model_pro.generate_content("What is 2+2? Explain simply.")
-print(f"Gemini 3 Pro: {response.text[:100]}...")
+# Test Gemini 2.0 Flash Lite (lower quota, free tier friendly)
+# print("Testing Gemini 2.0 Flash Lite...")
+# resp = client.models.generate_content(
+#     model="gemini-2.0-flash-lite",
+#     contents="What is 2+2? Explain simply."
+# )
+# print(f"Gemini 2.0 Flash Lite: {resp.text[:100]}...")
+
+# Test Gemini 2.5 Flash Lite (stable, lower token usage)
+print("\nTesting Gemini 2.5 Flash Lite...")
+resp = client.models.generate_content(
+    model="gemini-2.5-flash-lite",
+    contents="What is 2+2? Explain simply."
+)
+print(f"Gemini 2.5 Flash Lite: {resp.text[:100]}...")
 
 print("\n✅ Gemini 3 models are working!")

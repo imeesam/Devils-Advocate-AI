@@ -126,7 +126,8 @@ with st.sidebar:
     # API status
     st.markdown("### 🔧 System Status")
     st.success("✅ Gemini API: Ready")
-    model_name = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
+    # model_name1 = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
+    model_name = os.getenv("GEMINI_MODEL", "gemini-2.5-flash-lite")
     st.caption(f"Powered by {model_name}")
 
 # Main input

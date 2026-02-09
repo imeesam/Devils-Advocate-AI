@@ -13,7 +13,8 @@ class GeminiClient:
     
     def __init__(self, api_key: Optional[str] = None):
         self.api_key = api_key or os.getenv("GEMINI_API_KEY")
-        self.model_name = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
+        # self.model_name = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
+        self.model_name = os.getenv("GEMINI_MODEL", "gemini-2.5-flash-lite")
         self.client = None
         
         if not self.api_key:
