@@ -12,13 +12,7 @@ if not api_key:
 
 client = genai.Client(api_key=api_key)
 
-# Test Gemini 2.0 Flash Lite (lower quota, free tier friendly)
-# print("Testing Gemini 2.0 Flash Lite...")
-# resp = client.models.generate_content(
-#     model="gemini-2.0-flash-lite",
-#     contents="What is 2+2? Explain simply."
-# )
-# print(f"Gemini 2.0 Flash Lite: {resp.text[:100]}...")
+
 
 # Test Gemini 2.5 Flash Lite (stable, lower token usage)
 print("\nTesting Gemini 2.5 Flash Lite...")
@@ -28,4 +22,3 @@ resp = client.models.generate_content(
 )
 print(f"Gemini 2.5 Flash Lite: {resp.text[:100]}...")
 
-print("\n✅ Gemini 3 models are working!")

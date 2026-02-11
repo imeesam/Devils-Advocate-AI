@@ -16,7 +16,7 @@ Instead of producing a single answer, the system:
 - Explainable outputs
 
 ## Tech
-- Google Gemini (latest reasoning-capable model)
+- Google Gemini (gemini-2.5-flash-lite)
 - Streamlit
 - Python
 
