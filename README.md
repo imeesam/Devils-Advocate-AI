@@ -18,7 +18,7 @@ Instead of producing a single answer, the system:
 ## Tech
 - Google Gemini (gemini-2.5-flash-lite)
 - Streamlit
-- Python
+- Python (3.10 recommended)
 
 ## Run locally
 1. Add your Gemini API key to `.env`
